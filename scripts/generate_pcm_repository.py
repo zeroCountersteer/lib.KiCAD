@@ -28,6 +28,7 @@ def main() -> int:
     parser.add_argument("--metadata", type=Path, default=Path("pcm/metadata.json"))
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--version", required=True)
+    parser.add_argument("--status", choices=("stable", "testing", "development", "deprecated"), default="stable")
     parser.add_argument("--zip", type=Path, required=True)
     parser.add_argument("--asset-url", required=True)
     parser.add_argument("--releases-json", type=Path)
@@ -48,7 +49,7 @@ def main() -> int:
     checksum = __import__("hashlib").sha256(args.zip.read_bytes()).hexdigest()
     with zipfile.ZipFile(args.zip) as archive:
         install_size = sum(entry.file_size for entry in archive.infolist())
-    current = {"version": args.version, "status": "stable", "kicad_version": "10.0", "download_url": args.asset_url, "download_sha256": checksum, "download_size": args.zip.stat().st_size, "install_size": install_size}
+    current = {"version": args.version, "status": args.status, "kicad_version": "10.0", "download_url": args.asset_url, "download_sha256": checksum, "download_size": args.zip.stat().st_size, "install_size": install_size}
     if not any(v.get("version") == args.version for v in package["versions"]):
         package["versions"].append(current)
     else:

@@ -14,6 +14,10 @@ from pathlib import Path
 
 SEMVER = re.compile(r"^(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?$")
 SKIP = {".git", ".github", ".codex", ".agents", "dist", "build", "__pycache__"}
+EXTERNAL_MODEL_PREFIXES = (
+    "${KICAD6_3RD_PARTY}/",
+    "${KICAD10_3RD_PARTY}/3dmodels/com_github_perigoso_keyswitch-kicad-library/",
+)
 
 
 def digest(path: Path) -> str:
@@ -30,38 +34,67 @@ def copy_tree(source: Path, destination: Path) -> None:
     shutil.copytree(source, destination, copy_function=shutil.copy2)
 
 
-def metadata(template: Path, version: str, package_root: Path) -> dict:
+def metadata(template: Path, version: str, status: str, package_root: Path) -> dict:
     data = json.loads(template.read_text(encoding="utf-8"))
     data.pop("kicad_version", None)
     data["$schema"] = "https://go.kicad.org/pcm/schemas/v2"
-    data["versions"] = [{"version": version, "status": "stable", "kicad_version": "10.0"}]
+    data["versions"] = [{"version": version, "status": status, "kicad_version": "10.0"}]
     (package_root / "metadata.json").write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     return data
 
 
-def write_library_tables(package_root: Path) -> None:
-    """Ship tables so installed symbol footprint nicknames resolve locally."""
-    (package_root / "fp-lib-table").write_text(
-        """(fp_lib_table
-  (version 7)
-  (lib (name \"lib\")(type \"KiCad\")(uri \"${KIPRJMOD}/footprints/lib.pretty\")(options \"\")(descr \"lib.KiCAD footprints\"))
-  (lib (name \"Package_SoC\")(type \"KiCad\")(uri \"${KIPRJMOD}/footprints/Package_SoC.pretty\")(options \"\")(descr \"lib.KiCAD SoC footprints\"))
-  (lib (name \"Package_PMIC\")(type \"KiCad\")(uri \"${KIPRJMOD}/footprints/Package_PMIC.pretty\")(options \"\")(descr \"lib.KiCAD PMIC footprints\"))
-)
-""",
-        encoding="utf-8",
-    )
-    (package_root / "sym-lib-table").write_text(
-        """(sym_lib_table
-  (version 7)
-  (lib (name \"lib\")(type \"KiCad\")(uri \"${KIPRJMOD}/symbols/lib.kicad_sym\")(options \"\")(descr \"lib.KiCAD library\"))
-  (lib (name \"Project_Generic\")(type \"KiCad\")(uri \"${KIPRJMOD}/symbols/Project_Generic.kicad_sym\")(options \"\")(descr \"BOM-ready generic project symbols\"))
-  (lib (name \"SoC_Allwinner\")(type \"KiCad\")(uri \"${KIPRJMOD}/symbols/SoC_Allwinner.kicad_sym\")(options \"\")(descr \"lib.KiCAD Allwinner symbols\"))
-  (lib (name \"PMIC_XPowers\")(type \"KiCad\")(uri \"${KIPRJMOD}/symbols/PMIC_XPowers.kicad_sym\")(options \"\")(descr \"lib.KiCAD X-Powers symbols\"))
-)
-""",
-        encoding="utf-8",
-    )
+def remove_external_model_blocks(text: str) -> str:
+    """Remove model blocks that refer to libraries not shipped by this package."""
+    output = []
+    cursor = 0
+    while True:
+        start = text.find("(model ", cursor)
+        if start < 0:
+            output.append(text[cursor:])
+            break
+        output.append(text[cursor:start])
+        depth = 0
+        quoted = False
+        escaped = False
+        end = None
+        for index in range(start, len(text)):
+            char = text[index]
+            if quoted:
+                if escaped:
+                    escaped = False
+                elif char == "\\":
+                    escaped = True
+                elif char == '"':
+                    quoted = False
+            elif char == '"':
+                quoted = True
+            elif char == '(':
+                depth += 1
+            elif char == ')':
+                depth -= 1
+                if depth == 0:
+                    end = index + 1
+                    break
+        if end is None:
+            raise ValueError("unterminated footprint model block")
+        block = text[start:end]
+        path_start = block.find('"')
+        path_end = block.find('"', path_start + 1) if path_start >= 0 else -1
+        model_path = block[path_start + 1:path_end] if path_end > path_start else ""
+        if model_path.startswith(EXTERNAL_MODEL_PREFIXES):
+            cursor = end
+            continue
+        output.append(block)
+        cursor = end
+    return "".join(output)
+
+
+def sanitize_footprints(footprints_root: Path) -> None:
+    for footprint in footprints_root.rglob("*.kicad_mod"):
+        original = footprint.read_text(encoding="utf-8")
+        sanitized = remove_external_model_blocks(original)
+        if sanitized != original:
+            footprint.write_text(sanitized, encoding="utf-8")
 
 
 def write_zip(root: Path, output: Path) -> None:
@@ -81,6 +114,7 @@ def main() -> int:
     parser.add_argument("--repo", type=Path, default=Path("."))
     parser.add_argument("--metadata", type=Path, default=Path("pcm/metadata.json"))
     parser.add_argument("--version", required=True)
+    parser.add_argument("--status", choices=("stable", "testing", "development", "deprecated"), default="stable")
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     if not SEMVER.fullmatch(args.version):
@@ -101,8 +135,8 @@ def main() -> int:
         # their own namespace so installing the PCM package does not mix
         # template files with KiCad's symbol/footprint/model libraries.
         copy_tree(repo / "templates", root / "templates")
-        write_library_tables(root)
-        metadata(template, args.version, root)
+        sanitize_footprints(root / "footprints")
+        metadata(template, args.version, args.status, root)
         for file in root.rglob("*"):
             if file.is_file() and any(token in file.read_text(encoding="utf-8", errors="ignore") for token in ("C:/Users/", "/home/", "Documents/GitHub/")):
                 raise ValueError(f"development path found in package input: {file}")

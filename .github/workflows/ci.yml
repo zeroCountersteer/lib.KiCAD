@@ -30,6 +30,7 @@ jobs:
             --metadata pcm/metadata.json \
             --version "$VERSION" \
             --output "dist/lib.KiCAD-$VERSION.zip"
+          python3 scripts/validate_pcm_package.py "dist/lib.KiCAD-$VERSION.zip"
       - uses: actions/upload-artifact@v4
         with:
           name: kicad-pcm-test-package
@@ -60,7 +61,9 @@ jobs:
             --repo . \
             --metadata pcm/metadata.json \
             --version "$VERSION" \
+            --status development \
             --output dist/lib.KiCAD-rolling.zip
+          python3 scripts/validate_pcm_package.py dist/lib.KiCAD-rolling.zip
 
       - name: Update rolling release
         env:
@@ -95,6 +98,7 @@ jobs:
             --metadata pcm/metadata.json \
             --output-dir site \
             --version "$VERSION" \
+            --status development \
             --zip dist/lib.KiCAD-rolling.zip \
             --asset-url "https://github.com/${GITHUB_REPOSITORY}/releases/download/rolling/lib.KiCAD-rolling.zip" \
             --releases-json dist/releases.json
@@ -144,6 +148,7 @@ jobs:
             --metadata pcm/metadata.json \
             --version "$VERSION" \
             --output "dist/lib.KiCAD-$VERSION.zip"
+          python3 scripts/validate_pcm_package.py "dist/lib.KiCAD-$VERSION.zip"
 
       - name: Create release and upload package
         env:
