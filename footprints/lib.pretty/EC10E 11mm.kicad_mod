@@ -197,7 +197,7 @@
 		(uuid "80b17423-e093-4203-9597-6b123b388ebe")
 	)
 	(embedded_fonts no)
-	(model "${KICAD10_3RD_PARTY}/3dmodels/lib.3dshapes/EC10E1220503.STEP"
+	(model "${KICAD10_3RD_PARTY}/3dmodels/com_github_zerocountersteer_lib-kicad/lib.3dshapes/EC10E1220503.STEP"
 		(offset
 			(xyz 0 -0.25 11)
 		)
@@ -208,7 +208,7 @@
 			(xyz -0 -0 -0)
 		)
 	)
-	(model "${KICAD10_3RD_PARTY}/3dmodels/lib.3dshapes/Sensei Scroll Wheel.step"
+	(model "${KICAD10_3RD_PARTY}/3dmodels/com_github_zerocountersteer_lib-kicad/lib.3dshapes/Sensei Scroll Wheel.step"
 		(offset
 			(xyz 0 -3.5 11)
 		)

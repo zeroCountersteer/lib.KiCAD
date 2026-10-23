@@ -973,7 +973,7 @@
 		(uuid "aef73218-bc2d-43fa-b3eb-23959e67d223")
 	)
 	(embedded_fonts no)
-	(model "${KICAD10_3RD_PARTY}/3dmodels/lib.3dshapes/MTSSD03-67MSW337.STEP"
+	(model "${KICAD10_3RD_PARTY}/3dmodels/com_github_zerocountersteer_lib-kicad/lib.3dshapes/MTSSD03-67MSW337.STEP"
 		(offset
 			(xyz 0 1.8 1.3)
 		)

@@ -387,7 +387,7 @@
 		(uuid "560fbabb-021f-4c87-90a6-e5badbaaabc2")
 	)
 	(embedded_fonts no)
-	(model "${KICAD10_3RD_PARTY}/3dmodels/lib.3dshapes/POWERPAK_SO-8_DUAL_VIS.step"
+	(model "${KICAD10_3RD_PARTY}/3dmodels/com_github_zerocountersteer_lib-kicad/lib.3dshapes/POWERPAK_SO-8_DUAL_VIS.step"
 		(offset
 			(xyz 0 0 0)
 		)

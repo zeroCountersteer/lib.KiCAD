@@ -1431,7 +1431,7 @@
 		(uuid "77a672ad-b35b-4f12-bc2c-be06fcac89af")
 	)
 	(embedded_fonts no)
-	(model "${KICAD10_3RD_PARTY}/3dmodels/lib.3dshapes/RGR0020A.stp"
+	(model "${KICAD10_3RD_PARTY}/3dmodels/com_github_zerocountersteer_lib-kicad/lib.3dshapes/RGR0020A.stp"
 		(offset
 			(xyz 0 0 0)
 		)

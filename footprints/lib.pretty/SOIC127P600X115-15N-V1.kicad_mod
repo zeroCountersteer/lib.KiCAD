@@ -1538,6 +1538,7 @@
 			(checksum "2EAA53F34CC9E5A0234149A8D4B2909C")
 		)
 	)
+	(model "PG-TDSO-14-11.stp"
 		(scale
 			(xyz 1 1 1)
 		)

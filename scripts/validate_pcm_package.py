@@ -11,6 +11,7 @@ from pathlib import Path
 
 ALLOWED_ROOTS = {"symbols", "footprints", "3dmodels", "templates", "resources", "metadata.json"}
 MODEL_RE = re.compile(r'\(model\s+"([^"]+)"')
+PACKAGE_ID = "com_github_zerocountersteer_lib-kicad"
 
 
 def main() -> int:
@@ -43,7 +44,13 @@ def main() -> int:
                 raise ValueError(f"legacy KICAD6 model reference remains: {model}")
             if model.startswith("${KICAD10_3RD_PARTY}/"):
                 relative = model.split("}/", 1)[1]
-                if relative not in names:
+                installed_prefix = f"3dmodels/{PACKAGE_ID}/"
+                archive_relative = (
+                    "3dmodels/" + relative.removeprefix(installed_prefix)
+                    if relative.startswith(installed_prefix)
+                    else relative
+                )
+                if archive_relative not in names:
                     raise ValueError(f"shipped model is missing: {relative}")
         print(f"PCM package validation OK: {args.archive} ({len(names)} entries)")
     return 0

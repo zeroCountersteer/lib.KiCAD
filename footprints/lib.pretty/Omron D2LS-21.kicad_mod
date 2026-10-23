@@ -240,7 +240,7 @@
 		(uuid "d9cfcf76-690d-4b93-8e0c-d9c46dda79bb")
 	)
 	(embedded_fonts no)
-	(model "${KICAD10_3RD_PARTY}/3dmodels/lib.3dshapes/D2LS-21--3DModel-STEP-273799.STEP"
+	(model "${KICAD10_3RD_PARTY}/3dmodels/com_github_zerocountersteer_lib-kicad/lib.3dshapes/D2LS-21--3DModel-STEP-273799.STEP"
 		(offset
 			(xyz -2 0.25 0)
 		)

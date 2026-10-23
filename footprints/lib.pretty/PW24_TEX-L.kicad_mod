@@ -1431,7 +1431,7 @@
 		(uuid "705a36d4-8c40-427c-b241-b2becddc4d64")
 	)
 	(embedded_fonts no)
-	(model "${KICAD10_3RD_PARTY}/3dmodels/lib.3dshapes/PW0024A.stp"
+	(model "${KICAD10_3RD_PARTY}/3dmodels/com_github_zerocountersteer_lib-kicad/lib.3dshapes/PW0024A.stp"
 		(offset
 			(xyz 0 0 0)
 		)

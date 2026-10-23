@@ -784,7 +784,7 @@
 		(uuid "82a630c4-d8ea-4032-b2c8-bd78587bcf63")
 	)
 	(embedded_fonts no)
-	(model "${KICAD10_3RD_PARTY}/3dmodels/lib.3dshapes/RK808-D--3DModel-STEP-56544.STEP"
+	(model "${KICAD10_3RD_PARTY}/3dmodels/com_github_zerocountersteer_lib-kicad/lib.3dshapes/RK808-D--3DModel-STEP-56544.STEP"
 		(offset
 			(xyz 0 0 0)
 		)

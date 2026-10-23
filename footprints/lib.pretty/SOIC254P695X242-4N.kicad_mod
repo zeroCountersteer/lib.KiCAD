@@ -180,7 +180,7 @@
 		(uuid "5063edf9-89fa-456c-a52d-286540b6b6ba")
 	)
 	(embedded_fonts no)
-	(model "${KICAD10_3RD_PARTY}/3dmodels/lib.3dshapes/VOM1271T.step"
+	(model "${KICAD10_3RD_PARTY}/3dmodels/com_github_zerocountersteer_lib-kicad/lib.3dshapes/VOM1271T.step"
 		(offset
 			(xyz 0 0 0)
 		)

@@ -454,7 +454,7 @@
 		(uuid "555a22be-17dc-48c9-88cd-29ce9eab8242")
 	)
 	(embedded_fonts no)
-	(model "${KICAD10_3RD_PARTY}/3dmodels/lib.3dshapes/DRV0006A.stp"
+	(model "${KICAD10_3RD_PARTY}/3dmodels/com_github_zerocountersteer_lib-kicad/lib.3dshapes/DRV0006A.stp"
 		(offset
 			(xyz 0 0 0)
 		)

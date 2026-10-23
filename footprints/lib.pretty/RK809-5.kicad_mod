@@ -3879,7 +3879,7 @@
 		(uuid "a9d1383f-cdca-405d-9850-5b606c6fa5dc")
 	)
 	(embedded_fonts no)
-	(model "${KICAD10_3RD_PARTY}/3dmodels/lib.3dshapes/QFN_809-5_RCC.step"
+	(model "${KICAD10_3RD_PARTY}/3dmodels/com_github_zerocountersteer_lib-kicad/lib.3dshapes/QFN_809-5_RCC.step"
 		(offset
 			(xyz 0 0 0)
 		)

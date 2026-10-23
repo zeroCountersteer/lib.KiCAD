@@ -1303,7 +1303,7 @@
 		(uuid "fac72c0a-32aa-4cd3-867d-4bf1ebdaa2af")
 	)
 	(embedded_fonts no)
-	(model "${KICAD10_3RD_PARTY}/3dmodels/lib.3dshapes/SDINBDG4-16G-I1.step"
+	(model "${KICAD10_3RD_PARTY}/3dmodels/com_github_zerocountersteer_lib-kicad/lib.3dshapes/SDINBDG4-16G-I1.step"
 		(offset
 			(xyz 0 0 0)
 		)

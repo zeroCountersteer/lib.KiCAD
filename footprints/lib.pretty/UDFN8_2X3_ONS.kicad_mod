@@ -332,7 +332,7 @@
 		(uuid "0887f02f-0858-4659-8d6c-5f692175bd09")
 	)
 	(embedded_fonts no)
-	(model "${KICAD10_3RD_PARTY}/3dmodels/lib.3dshapes/UDFN8_2X3_ONS.step"
+	(model "${KICAD10_3RD_PARTY}/3dmodels/com_github_zerocountersteer_lib-kicad/lib.3dshapes/UDFN8_2X3_ONS.step"
 		(offset
 			(xyz 0 0 0)
 		)

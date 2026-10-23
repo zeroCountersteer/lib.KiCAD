@@ -380,7 +380,7 @@
 		(uuid "bf70b41b-bd63-44e5-aeef-ae17da9ebb60")
 	)
 	(embedded_fonts no)
-	(model "${KICAD10_3RD_PARTY}/3dmodels/lib.3dshapes/DRR0012E.stp"
+	(model "${KICAD10_3RD_PARTY}/3dmodels/com_github_zerocountersteer_lib-kicad/lib.3dshapes/DRR0012E.stp"
 		(offset
 			(xyz 0 0 0)
 		)

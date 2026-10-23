@@ -187,7 +187,7 @@
 		(uuid "b1fb5496-df6d-418c-8ffd-8c8d9802d2e6")
 	)
 	(embedded_fonts no)
-	(model "${KICAD10_3RD_PARTY}/3dmodels/lib.3dshapes/FDMC8321L_Power33.step"
+	(model "${KICAD10_3RD_PARTY}/3dmodels/com_github_zerocountersteer_lib-kicad/lib.3dshapes/FDMC8321L_Power33.step"
 		(offset
 			(xyz 0 0 0)
 		)

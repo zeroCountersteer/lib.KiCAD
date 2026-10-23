@@ -815,7 +815,7 @@
 		(uuid "4914c43d-8c0a-49f1-910d-eee055980b86")
 	)
 	(embedded_fonts no)
-	(model "${KICAD10_3RD_PARTY}/3dmodels/lib.3dshapes/USB1020-15-L-A.stp"
+	(model "${KICAD10_3RD_PARTY}/3dmodels/com_github_zerocountersteer_lib-kicad/lib.3dshapes/USB1020-15-L-A.stp"
 		(offset
 			(xyz -11.75 1.25 5.25)
 		)

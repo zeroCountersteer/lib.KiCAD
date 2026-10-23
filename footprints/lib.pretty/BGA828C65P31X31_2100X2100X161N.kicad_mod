@@ -6029,7 +6029,7 @@
 		(uuid "77a9b2df-16fe-4f8f-8eec-85b2ebc4f363")
 	)
 	(embedded_fonts no)
-	(model "${KICAD10_3RD_PARTY}/3dmodels/lib.3dshapes/RK3399.step"
+	(model "${KICAD10_3RD_PARTY}/3dmodels/com_github_zerocountersteer_lib-kicad/lib.3dshapes/RK3399.step"
 		(offset
 			(xyz 0 0 0)
 		)

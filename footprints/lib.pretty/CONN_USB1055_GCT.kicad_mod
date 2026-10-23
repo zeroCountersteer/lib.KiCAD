@@ -540,7 +540,7 @@
 		(uuid "97735497-84c9-4046-8df1-369e254e2b36")
 	)
 	(embedded_fonts no)
-	(model "${KICAD10_3RD_PARTY}/3dmodels/lib.3dshapes/USB1055-15-L-A.stp"
+	(model "${KICAD10_3RD_PARTY}/3dmodels/com_github_zerocountersteer_lib-kicad/lib.3dshapes/USB1055-15-L-A.stp"
 		(offset
 			(xyz 3.5 -15 0)
 		)

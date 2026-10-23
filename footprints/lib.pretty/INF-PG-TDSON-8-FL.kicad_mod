@@ -1895,6 +1895,7 @@
 			(checksum "ABC3F1F31DFCDA476BE9EC418077239C")
 		)
 	)
+	(model "TDSON-8-6.stp"
 		(scale
 			(xyz 1 1 1)
 		)

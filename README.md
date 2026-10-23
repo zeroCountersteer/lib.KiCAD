@@ -12,7 +12,7 @@
 
 ## Direct git use
 
-Add `symbols/*.kicad_sym` in Symbol Editor → Manage Symbol Libraries and add the three `footprints/*.pretty` directories in Footprint Libraries. For custom 3D models, set `KICAD10_3RD_PARTY` to this repository root, or use the PCM installation. Custom references use `${KICAD10_3RD_PARTY}/3dmodels/lib.3dshapes/...`; stock `${KICAD10_3DMODEL_DIR}` references are unchanged. The PCM build removes references to legacy external model libraries that are not shipped by this package, so a clean PCM installation never points at an unavailable KiCad 6 or third-party model tree.
+Add `symbols/*.kicad_sym` in Symbol Editor → Manage Symbol Libraries and add the three `footprints/*.pretty` directories in Footprint Libraries. Do not override `KICAD10_3RD_PARTY`: custom references use the canonical PCM installation path `${KICAD10_3RD_PARTY}/3dmodels/com_github_zerocountersteer_lib-kicad/lib.3dshapes/...`, while stock `${KICAD10_3DMODEL_DIR}` references are unchanged. On a machine where the PCM package has not been installed, add that model directory under the same package-id path in KiCad's normal third-party directory. The PCM build removes references to legacy external model libraries that are not shipped by this package, so a clean PCM installation never points at an unavailable KiCad 6 or third-party model tree.
 
 ## Validate and build locally
 
